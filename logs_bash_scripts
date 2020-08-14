@@ -10,4 +10,54 @@ curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.p
 
 Apache bots reports
 
+#!bin/bash
+
+cd /var/lib/jenkins/workspace/apache_live_ip_bases_hits/
+
+ROBOT=$(cat access.log.1 | grep robot | awk '{print $7}' | head -n 1)
+BOT_HITS=$(cat access.log.1 | grep robot | wc -l)
+IP_ADDR=$(cat access.log.1 | grep robot | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -n  |  uniq -c | sort -nr)
+GOOGLE_BOT_COUNT=$(cat access.log.1 | grep robot | grep Googlebot | wc -l)
+LAST_GOOGLE_VISIT=$(cat access.log.1 | grep robot | grep Googlebot | tail -n 1)
+BING_BOT_COUNT=$(cat access.log.1 | grep robot | grep bingbot | wc -l)
+LAST_BING_VISIT=$(cat access.log.1 | grep robot | grep bingbot | tail -n 1)
+UNKNOW_BOTS_VISIT=$(cat access.log.1 | grep robot | grep -v bingbot | grep -v Googlebot | tail -n 5)
+
+
+if [ "$ROBOT" = "/robots.txt" ]
+then
+        echo ""
+        echo "Bots hits in last 24 hours is $BOT_HITS" 
+        echo ""
+        echo "Top bots by IP Address details are given below:--"
+        echo ""
+        echo "$IP_ADDR"
+        echo ""
+        echo "Google Bot hits in last 24 hours is $GOOGLE_BOT_COUNT"
+        echo ""
+        echo "Google bots visit details are mentioed below:-"
+        echo ""
+        echo "$LAST_GOOGLE_VISIT"
+        echo ""
+        echo "Bing Bot hits in last 24 hours in $BING_BOT_COUNT"
+        echo ""
+        echo "Bing bots visit details are mentioed below:--"
+        echo ""
+        echo "$LAST_BING_VISIT"
+        echo ""
+        echo "Unknow bots vist details are mentioed below:-"
+        echo ""
+        echo "$UNKNOW_BOTS_VISIT"
+        echo ""
+else
+        echo ""
+        echo "No bot's hit found on the Apache access logs"
+        echo ""
+        
+################################################################################################################################################################
+
+
+
+
+
 
