@@ -218,7 +218,7 @@ import pymysql
 import sys
 import os
 
-db = pymysql.connect("192.168.0.249","student","cGQsL8@s@3#C","study24x7_uat_4july19",port=3308 )
+db = pymysql.connect("ip_address","username","password","database_name",port=3308 )
 
 cur = db.cursor()
 
