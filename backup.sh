@@ -3,6 +3,25 @@
 Live_mariadb_backup
 
 
+#!/bin/bash
+
+set -e
+
+MARIADB="/opt/mariadb1/mariadb1/bin/mysqldump -S /opt/mariadb1/mariadb1-data/mariadb.sock -P 3307 --single-transaction=TRUE"
+USER="username"
+PASS="password"
+NOW="$(date +"%d-%m-%Y")"
+
+mkdir /mnt/Mariadb_Backup/$NOW
+
+$MARIADB -u$USER -p$PASS DATABASE_NAME > /mnt/Mariadb_Backup/$NOW/DATABASE_NAME_backup_$NOW.sql
+
+$MARIADB -u$USER -p$PASS DATABASE_NAME > /mnt/Mariadb_Backup/$NOW/DATABASE_NAME_admin_live_backup_$NOW.sql
+
+#$MARIADB -u$USER -p$PASS study24x7_uat_27july18 > /home/comet/Documents/Mariadb_Backup/$NOW/mariadb_study24x7_uat_backup_$NOW.sql
+
+#$MARIADB -u$USER -p$PASS study24x7_admin_uat_12sep18 > /home/comet/Documents/Mariadb_Backup/$NOW/mariadb_study24x7_admin_uat_backup_$NOW.sql
+
 
 
 
