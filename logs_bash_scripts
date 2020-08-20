@@ -262,7 +262,155 @@ db.close()
 #################################################################################################################################################################
 
 
+Increase CPU load    -  
 
+sudo apt-get install stress -y
+stress --cpu 4
+
+#################################################################################################################################################################
+
+Disk Usage -
+
+ du -hs * | sort -rh | head -100
+ 
+ #################################################################################################################################################################
+ 
+ Aws s3 file upload cmd -
+ 
+ aws s3 cp  target_path/   s3://s3bucket_name --recursive --acl public-read-write
+eg: aws s3 cp  dist/study24x7/ s3://uat.study24x7.com --recursive --acl public-read-write
+
+#################################################################################################################################################################
+
+Clear cache memory in linux system
+
+sync; echo 1 > /proc/sys/vm/drop_caches
+sync; echo 2 > /proc/sys/vm/drop_caches
+sync; echo 3 > /proc/sys/vm/drop_caches 
+
+##################################################################################################################################################################
+
+Pem file scp -
+
+scp -r -i "/home/ginger/Documents/Live_Deploy_Azure/comet.pem" target_path comet@IP_Address:PATH
+scp -r -i "/home/ginger/Documents/Live_Deploy_Azure/comet.pem" user_name@IP_Address:PATH  .
+
+
+##################################################################################################################################################################
+
+Logs Hits 
+
+awk '{print $10}' file_name | sort -n  |  uniq -c | sort -nr
+
+##################################################################################################################################################################
+
+rsync  -
+
+rsync -avzh /SOURCE_PATH/* /Destination_path/
+
+##################################################################################################################################################################
+
+git clone from branch -
+
+git clone http://web_aaddress.git -b branch_name
+
+##################################################################################################################################################################
+
+Mariadb - Dump
+
+/opt/mariadb1/mariadb1/bin/mysqldump -S /opt/mariadb1/mariadb1-data/mariadb.sock 
+-P 3307 --single-transaction=TRUE -u root -p123456 databases_name > internal_testing.sql
+
+####################################################################################################################################################################
+
+Mariadb - Restore 
+
+/opt/mariadb1/mariadb1/bin/mysql -S /opt/mariadb1/mariadb1-data/mariadb.sock -P 3307
+ -u root -p123456 staging_study247_4.0.0.1 < dist_dump_13-june-2019.sql
+ 
+ #################################################################################################################################################################
+ 
+ MongoDB Full Backup
+ 
+ mongodump --host localhost --port 27017 --username root --password "admin@654321" --authenticationDatabase admin --out .
+ 
+ #################################################################################################################################################################
+ 
+ ssh copy ID
+ 
+ ssh-copy-id user@hostname.example.com
+ 
+ #################################################################################################################################################################
+ 
+ 
+ PHP Installation
+ 
+ https://tecadmin.net/install-php-7-on-ubuntu/
+ 
+ ################################################################################################################################################################
+ 
+ Angular Installation -
+ 
+ https://github.com/angular/angular-cli/issues/7735
+ 
+ ################################################################################################################################################################
+ 
+ elasticsearch
+ 
+ curl -XPOST localhost:9200/kibana_testing_21june19_new/4/_bulk?pretty  -H "Content-Type: application/x-ndjson" --data-binary  @'/home/ginger/kibanatesting.json'
+
+
+#################################################################################################################################################################
+
+Apache SSL 
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04
+
+#################################################################################################################################################################
+
+Elasticsearch Read only Mode 
+
+https://discuss.elastic.co/t/elk-stuck-in-read-only-mode/153478/2
+
+##################################################################################################################################################################
+
+Forbidden Kibana
+
+https://discuss.elastic.co/t/forbidden-12-index-read-only-allow-delete-api/110282/5
+
+##################################################################################################################################################################
+
+NPM INCREASE MEMORY
+
+https://www.npmjs.com/package/increase-memory-limit
+
+##################################################################################################################################################################
+
+TimeStamp logs 
+
+sed -n '/10:00:00/ , /12:01:02/p' catalina.out
+
+##################################################################################################################################################################
+
+rysnc 
+
+rsync -avhz -e "ssh -i /home/ginger/Documents/Live_Deploy_Azure/comet.pem" player.php  comet@104.211.89.237:/var/www/html/study24x7_video_live/plyr/plyrv1.php
+
+
+rsync -avhz -e "ssh -i /home/ginger/Documents/Live_Deploy_Azure/comet.pem"  Logo.png  comet@104.211.89.237:/var/www/html/study24x7_video_live/plyr/
+
+rsync -avhz -e "ssh -i /home/ginger/Documents/Live_Deploy_Azure/comet.pem"  playbutton.svg  comet@104.211.89.237:/var/www/html/study24x7_video_live/plyr/
+
+##################################################################################################################################################################
+
+Command 	For
+awk '{print $10}' live.csv | sort -n  |  uniq -c | sort -nr	                                  To get server hits count 
+awk '{print $12,$10}' Save.csv | sort -n  |  uniq -c | sort -nr	                                  To get Response Time
+cat Logs.csv |  grep 149.129.131.177 |    cut -d']' -f2  |grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -n  |  uniq -c | sort -nr	DDOS Attack
+"awk '{print $12,$10}' 26-July-2019_Tomcat.csv | sort -n  | sort -nr | head -n 100"	           Top 100 Response Time
+
+##################################################################################################################################################################
+ 
 
 
 
